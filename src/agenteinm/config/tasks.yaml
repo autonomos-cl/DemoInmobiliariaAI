@@ -1,0 +1,47 @@
+market_analysis_task:
+  description: >
+    Realizar un análisis exhaustivo del mercado inmobiliario en {zona}:
+    1. Analizar tendencias de precios
+    2. Identificar oportunidades de inversión
+    3. Evaluar el ROI potencial
+    4. Generar alertas de precio/zona relevantes
+  expected_output: >
+    Un reporte ejecutivo detallado que incluya:
+    1. Análisis de mercado actual
+    2. Oportunidades detectadas con ROI estimado
+    3. Alertas de precios y zonas relevantes
+    4. Recomendaciones estratégicas
+  agent: ceo_virtual
+  dependencies: []
+
+legal_review_task:
+  description: >
+    Realizar un análisis legal completo de la documentación inmobiliaria en {zona}:
+    1. Revisar contratos y escrituras
+    2. Validar cumplimiento normativo
+    3. Identificar riesgos legales
+    4. Generar alertas de riesgos
+  expected_output: >
+    Un informe legal detallado que incluya:
+    1. Análisis de documentación legal
+    2. Validación de contratos
+    3. Identificación de riesgos legales
+    4. Recomendaciones jurídicas
+  agent: legal_assistant
+  dependencies: ["market_analysis_task"]
+
+coordination_task:
+  description: >
+    Coordinar y supervisar el análisis inmobiliario integral:
+    1. Revisar el análisis de mercado del CEO Virtual
+    2. Evaluar el informe legal del Abogado
+    3. Integrar ambos análisis
+    4. Generar conclusiones y recomendaciones finales
+  expected_output: >
+    Un reporte ejecutivo consolidado que incluya:
+    1. Resumen ejecutivo del análisis de mercado
+    2. Resumen de aspectos legales clave
+    3. Recomendaciones integradas
+    4. Plan de acción propuesto
+  agent: task_manager
+  dependencies: ["legal_review_task"]
