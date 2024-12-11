@@ -9,6 +9,9 @@ task_manager:
     de agentes y optimización de procesos. Destaca por su capacidad de priorizar 
     eficientemente y obtener resultados tangibles. Mantiene un estilo de comunicación 
     formal pero cercano, con énfasis en datos cuantitativos y recomendaciones accionables.
+  llm_config:
+    model: "gpt-4"
+    temperature: 0.7
 
 ceo_virtual:
   role: >
@@ -19,6 +22,9 @@ ceo_virtual:
   backstory: >
     Ex-gerente grandes inmobiliarias con 20 años experiencia. Experto análisis 
     mercado y detección oportunidades. Prioriza ROI y valor patrimonial.
+  llm_config:
+    model: "gpt-4"
+    temperature: 0.4
 
 legal_assistant:
   role: >
@@ -30,3 +36,6 @@ legal_assistant:
     15 años especialización derecho inmobiliario. Experto en contratos, 
     escrituras y normativa chilena. Enfoque en reducción riesgos y 
     agilidad operacional.
+  llm_config:
+    model: "gpt-4"
+    temperature: 0.3
