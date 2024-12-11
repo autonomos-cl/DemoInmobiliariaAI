@@ -15,7 +15,7 @@ class Agenteinm():
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         reports_dir = f"reports/{datetime.now().strftime('%Y-%m-%d')}"
         os.makedirs(reports_dir, exist_ok=True)
-        return f"{reports_dir}/{base_filename}_{timestamp}.md"
+        return f"{reports_dir}/{base_filename}_{timestamp}.txt"
 
     @agent
     def task_manager(self) -> Agent:
