@@ -1,3 +1,7 @@
+# Herramienta de búsqueda web usando Serper API
+# Permite a los agentes buscar información actualizada sobre mercado inmobiliario
+# Retorna resultados estructurados con título, snippet y enlace
+
 import os
 import json
 import requests
@@ -9,58 +13,58 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class SearchInput(BaseModel):
-    """Input for SerperSearch."""
-    query: str = Field(..., description="The search query to look up.")
+    """Parámetros de búsqueda"""
+    query: str = Field(..., description="Consulta de búsqueda")
 
 class SerperSearchTool(BaseTool):
     name: str = "Serper Search"
     description: str = (
-        "A tool for performing internet searches using Serper API. "
-        "Useful for finding current information about real estate markets, "
-        "property trends, and legal regulations."
+        "Búsqueda web para información inmobiliaria actualizada: "
+        "mercados, tendencias, regulaciones y precios"
     )
     args_schema: Type[BaseModel] = SearchInput
 
     def _run(self, query: str) -> str:
-        """Execute the search query."""
-        api_key = os.getenv('SERPER_API_KEY')
-        if not api_key:
-            raise ValueError("Serper API key not found in environment variables")
-
-        headers = {
-            'X-API-KEY': api_key,
-            'Content-Type': 'application/json'
-        }
-        
-        payload = json.dumps({"q": query})
-        response = requests.post(
-            'https://google.serper.dev/search',
-            headers=headers,
-            data=payload
-        )
-        
-        if response.status_code != 200:
-            raise Exception(f'Request failed with status code: {response.status_code}')
-
+        """Ejecuta búsqueda en Serper"""
         try:
-            results = response.json()
+            # Configuración API
+            api_key = os.getenv('SERPER_API_KEY')
+            if not api_key:
+                raise ValueError("API key de Serper no encontrada")
+
+            headers = {
+                'X-API-KEY': api_key,
+                'Content-Type': 'application/json'
+            }
             
-            # Format the results
+            # Ejecuta búsqueda
+            payload = json.dumps({"q": query})
+            response = requests.post(
+                'https://google.serper.dev/search',
+                headers=headers,
+                data=payload
+            )
+            
+            if response.status_code != 200:
+                raise Exception(f'Error: código {response.status_code}')
+
+            # Formatea resultados
+            results = response.json()
             formatted_results = []
             
-            # Add organic results
+            # Resultados orgánicos
             if 'organic' in results:
-                for result in results['organic'][:5]:  # Limit to top 5 results
+                for result in results['organic'][:5]:
                     formatted_results.append(
                         f"Title: {result.get('title', 'N/A')}\n"
                         f"Snippet: {result.get('snippet', 'N/A')}\n"
                         f"Link: {result.get('link', 'N/A')}\n"
                     )
             
-            # Add news results if available
+            # Noticias
             if 'news' in results and results['news']:
                 formatted_results.append("\nRelevant News:")
-                for news in results['news'][:3]:  # Limit to top 3 news items
+                for news in results['news'][:3]:
                     formatted_results.append(
                         f"Title: {news.get('title', 'N/A')}\n"
                         f"Date: {news.get('date', 'N/A')}\n"
@@ -71,4 +75,4 @@ class SerperSearchTool(BaseTool):
             return "\n\n".join(formatted_results)
             
         except Exception as e:
-            return f"Error processing search results: {str(e)}"
+            return f"Error en búsqueda: {str(e)}"

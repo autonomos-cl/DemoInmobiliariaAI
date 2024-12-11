@@ -1,0 +1,21 @@
+# Dependencias principales
+crewai==0.3.11            # Framework para agentes
+langchain==0.3.11         # Herramientas y utilidades para IA
+openai==1.3.5             # API de OpenAI
+
+# Base de datos
+pymongo==4.10.1           # Cliente MongoDB
+python-dotenv==1.0.1      # Manejo de variables de entorno
+
+# Herramientas web
+requests==2.32.3          # Cliente HTTP para Serper API
+
+# Utilidades
+pydantic==2.10.3          # Validación de datos
+PyYAML==6.0.2            # Manejo de archivos YAML
+dnspython==2.7.0         # Requerido por pymongo
+
+# Opcional - para desarrollo
+pytest==7.4.3            # Testing
+black==23.11.0           # Formateo de código
+flake8==6.1.0            # Linting
