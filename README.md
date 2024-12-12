@@ -27,6 +27,7 @@ pip install -r requirements.txt
 OPENAI_API_KEY=tu_api_key_aqui
 SERPER_API_KEY=tu_api_key_aqui
 MONGODB_URI=tu_uri_mongodb_aqui
+GOOGLE_CREDENTIALS_FILE=credentials.json
 ```
 
 ## Estructura
@@ -70,3 +71,20 @@ python src/agenteinm/utils/check_reports.py
 
 - MongoDB Atlas: Almacenamiento principal
 - Respaldo local: /reports/[fecha]/[tipo]_[timestamp].txt
+
+# Google Drive Tools
+
+Herramienta para gestionar archivos en Google Drive con funcionalidades de análisis y organización automática.
+
+## Configuración Inicial
+
+### 1. Configurar Credenciales de Google Drive
+
+Si tienes las credenciales solo agrega el archivo al directerio raiz como credentials.json sino
+
+para ingresar debes usar la cuenta agente@autonomos.dev y la contraseña
+
+
+### 2. Configurar Variables de Entorno
+
+Crea un archivo `.env` en la raíz del proyecto:
